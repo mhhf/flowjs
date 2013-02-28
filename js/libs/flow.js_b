@@ -1,4 +1,5 @@
-window.PART = function(x,y) {
+FLOW1 = {
+	PART : function(x,y) {
   // Dynamics
   this.x=0;
   this.y=0;
@@ -33,7 +34,7 @@ window.PART = function(x,y) {
   };
 
   this.connect = function(p) {
-    var con = new window.Connection(this,p);
+    var con = new FLOW1.Connection(this,p);
     this.connection.push(con);
     p.connection.push(con);
   };
@@ -55,9 +56,9 @@ window.PART = function(x,y) {
   };
  
   this._init(x,y);
-};
+},
 
-window.Connection = function(p1, p2) {
+Connection : function(p1, p2) {
   this.p1=null;
   this.p2=null;
   this.impactRadius=600;
@@ -90,9 +91,9 @@ window.Connection = function(p1, p2) {
   this._init(p1,p2);
 
 
-};
+},
 
-window.GRID = function() {
+GRID : function() {
   this.grid= null;
   this.size= -1;
 
@@ -144,10 +145,10 @@ window.GRID = function() {
       }
     }
   };
-};
+},
 
 
-window.DynamicGRID = function() {
+DynamicGRID : function() {
   this.settings={
     gridSize: 600,
     bowlSize: 30
@@ -162,7 +163,7 @@ window.DynamicGRID = function() {
     this.particles = new Array();
     var bowls = this.settings.gridSize/this.settings.bowlSize;
     this.activeQue = new buckets.LinkedList();
-    this.particleGrid = new window.GRID();
+    this.particleGrid = new FLOW1.GRID();
     this.particleGrid.init(bowls);
   };
 
@@ -367,6 +368,8 @@ window.DynamicGRID = function() {
   };
 
   this._init();
+}
 };
+
 
 window.log = function(t){console.log(t);};

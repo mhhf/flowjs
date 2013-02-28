@@ -1,7 +1,9 @@
 window.FlowCanvas = Backbone.View.extend({
 
 	events: {
-	
+		'mousemove' : 'onMM',
+		'mousedown' : 'onMD',
+		'mouseup'  : 'onMU' 
 	},
 
 	initialize: function () {
@@ -40,9 +42,35 @@ window.FlowCanvas = Backbone.View.extend({
 				p2 = p.connection[j].getOther(p);
 				ctx.lineTo(p2.x,p2.y);
 				ctx.stroke();
-				p.connection[j].active = true;
+				// p.connection[j].active = true;
 			}
 		}
+	},
+
+	onMM: function(e){
+		this.model.mX = e.offsetX;
+		this.model.mY = e.offsetY;
+	},
+
+	onMD: function(e) {
+		var s = this.model.grid.getParticleByPos(e.offsetX, e.offsetY);
+		if(s != null){
+			this.model.set('selected', s);
+			s.removable = false;
+			if(!s.active) {
+				this.model.grid.setActive(s,true);
+			}
+		}
+	},
+
+	onMU: function(e) {
+		var s = this.model.get('selected');
+		if(s!=null) {
+			s.removable = true;
+			this.model.set('selected',null);
+		}
 	}
+
+
 });
 
