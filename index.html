@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>jQuery+RequireJS Sample Page</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/jquery-ui.css">
-        <style type="text/css" media="screen">
-            #slider {
-                width:200px;
-                height:5px;
-                margin-top:10px;
-            } 
+	<head>
+		<title>jQuery+RequireJS Sample Page</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<style type="text/css" media="screen">
+			#slider {
+				width:200px;
+				height:5px;
+				margin-top:10px;
+			} 
 
-            .ui-slider .ui-slider-handle { width: 12px; height:12px; margin-left:-5; }
-        </style>
-        <script data-main="js/main" src="js/libs/require.js"></script>
-        <script type="text/template" id="inspectorTemplate">
-            <input id='segmentName' type='text' />
-            <button id="newSegment" type="button">Click Me!</button>
-            <br />
-            <button id="newBtn" type="button">New Button</button>
-            <button id="removeBtn" type="button">Remove Button</button>
+			.ui-slider .ui-slider-handle { width: 12px; height:12px; margin-left:-5; }
+		</style>
+		<script data-main="js/main" src="js/libs/require.js"></script>
+		<script type="text/template" id="inspectorTemplate">
+			<input id='segmentName' type='text' />
+			<button id="newSegment" type="button">Click Me!</button>
+			<br />
+			<button id="newBtn" type="button">New Button</button>
+			<button id="removeBtn" type="button">Remove Button</button>
 
-            
-            <div id="slider"></div>
-            
-            <br />
-            <br />
-            <br />
-            <br />
-            <button id="sync" type="button">Sync</button>
-        </script>
-        
-    </head>
-    <body>
-        <div id='interactionWrapper'>
-        </div>
 
-        <div id='mainWrapper'>
-            <canvas id="canvasBack"  class ="canvas" width="600" height="600"></canvas>
-            <canvas id="canvasFront" class ="canvas" width="600" height="600"></canvas>
-            <canvas id="canvasHigh"  class ="canvas" width="600" height="600"></canvas>
-            <canvas id="canvasText"  class ="canvas" width="600" height="600"></canvas>
-        </div> 
-    </body>
+			<div id="slider"></div>
+
+			<br />
+			<br />
+			<br />
+			<br />
+			<button id="sync" type="button">Sync</button>
+		</script>
+
+	</head>
+	<body>
+		<div id='interactionWrapper'>
+		</div>
+
+		<div id='mainWrapper'>
+			<canvas id="canvasBack"  class ="canvas" width="600" height="600"></canvas>
+			<canvas id="canvasFront" class ="canvas" width="600" height="600"></canvas>
+			<canvas id="canvasHigh"  class ="canvas" width="600" height="600"></canvas>
+			<canvas id="canvasText"  class ="canvas" width="600" height="600"></canvas>
+		</div> 
+	</body>
 </html>

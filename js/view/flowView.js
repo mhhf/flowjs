@@ -50,6 +50,7 @@ window.FlowCanvas = Backbone.View.extend({
 	onMM: function(e){
 		this.model.mX = e.offsetX;
 		this.model.mY = e.offsetY;
+		this.model.trigger('updatedGrid');
 	},
 
 	onMD: function(e) {

@@ -1,2 +1,2 @@
-flowjs
+flowJs
 ======

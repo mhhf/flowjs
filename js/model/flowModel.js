@@ -6,6 +6,6 @@ window.FlowModel = Backbone.Model.extend({
 		},
     initialize: function () {
 
-      this.grid = new window.DynamicGRID();
+      this.grid = new FLOW.DynamicGRID();
     }
 });

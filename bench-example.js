@@ -49,10 +49,10 @@ benchsuite('Update Particle Test', function(){
 	// });
 
 	bench('update original', function() {
-		grid1.updateGrid();
+		grid2.updateGrid();
 	});
 	bench('update improved', function(){
-		grid2.updateGrid();
+		grid1.updateGrid();
 	});
 
 });

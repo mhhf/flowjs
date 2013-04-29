@@ -1,4 +1,4 @@
-FLOW5 = {
+FLOW = {
 	PART : function(x,y) {
 		this.x = x;
 		this.y = y;
@@ -17,54 +17,54 @@ DynamicGRID : function() {
 	this.particles = new Array();
 	var bowls = this.settings.gridSize/this.settings.bowlSize;
 	this.activeQue = new buckets.LinkedList();
-	this.particleGrid = new FLOW5.GRID();
+	this.particleGrid = new FLOW.GRID();
 	this.particleGrid.init(bowls);
 }
 };
 
-FLOW5.PART.prototype.x = 0;
-FLOW5.PART.prototype.y = 0;
+FLOW.PART.prototype.x = 0;
+FLOW.PART.prototype.y = 0;
 
-FLOW5.PART.prototype.fx = 0;
-FLOW5.PART.prototype.fy = 0;
+FLOW.PART.prototype.fx = 0;
+FLOW.PART.prototype.fy = 0;
 
-FLOW5.PART.prototype.bx = 0;
-FLOW5.PART.prototype.by = 0;
+FLOW.PART.prototype.bx = 0;
+FLOW.PART.prototype.by = 0;
 
 
 // Dynamics
-FLOW5.PART.prototype.bowl=null;
+FLOW.PART.prototype.bowl=null;
 
 // Propertys
-FLOW5.PART.prototype.dist = 20.45;
-FLOW5.PART.prototype.dv = 0;
-FLOW5.PART.prototype.scale = 0.0069;
+FLOW.PART.prototype.dist = 20.45;
+FLOW.PART.prototype.dv = 0;
+FLOW.PART.prototype.scale = 0.0069;
 
 
-FLOW5.PART.prototype.border = 0;	
-FLOW5.PART.prototype.finalFriction = 0.92;
-FLOW5.PART.prototype.friction = 0.92;
+FLOW.PART.prototype.border = 0;	
+FLOW.PART.prototype.finalFriction = 0.92;
+FLOW.PART.prototype.friction = 0.92;
 
-FLOW5.PART.prototype.impactRadius = 25;
+FLOW.PART.prototype.impactRadius = 25;
 
 // Relations
-FLOW5.PART.prototype.connection= null;
+FLOW.PART.prototype.connection= null;
 
 
 // Optimisation
-FLOW5.PART.prototype.updated = true;
-FLOW5.PART.prototype.active=true;
+FLOW.PART.prototype.updated = true;
+FLOW.PART.prototype.active=true;
 
-FLOW5.PART.prototype.removable= true;
+FLOW.PART.prototype.removable= true;
 
-FLOW5.PART.prototype.connect = function(p) {
-	var con = new FLOW5.Connection(this,p);
+FLOW.PART.prototype.connect = function(p) {
+	var con = new FLOW.Connection(this,p);
 	this.connection.push(con);
 	p.connection.push(con);
 	return con;
 };
 
-FLOW5.PART.prototype.getConnection = function(p) {
+FLOW.PART.prototype.getConnection = function(p) {
 	var retVar = null;
 
 	for (var i = 0; i < this.connection.length; i++) {
@@ -76,22 +76,22 @@ FLOW5.PART.prototype.getConnection = function(p) {
 	return retVar;
 };
 
-FLOW5.PART.prototype.updateActive = function(b) {
+FLOW.PART.prototype.updateActive = function(b) {
 	this.updated = b;
 };
 
 
-FLOW5.Connection.prototype.impactRadius=600;
+FLOW.Connection.prototype.impactRadius=600;
 
-FLOW5.Connection.prototype.dist = 50.45;
-FLOW5.Connection.prototype.dv = 0;
-FLOW5.Connection.prototype.scale = 0.0089;
-FLOW5.Connection.prototype.border = 100;	
-FLOW5.Connection.prototype.friction = 0.96;
+FLOW.Connection.prototype.dist = 50.45;
+FLOW.Connection.prototype.dv = 0;
+FLOW.Connection.prototype.scale = 0.0089;
+FLOW.Connection.prototype.border = 100;	
+FLOW.Connection.prototype.friction = 0.96;
 
-FLOW5.Connection.prototype.active = true;
+FLOW.Connection.prototype.active = true;
 
-FLOW5.Connection.prototype.getOther= function(p) {
+FLOW.Connection.prototype.getOther= function(p) {
 	if(p == this.p1) {
 		return this.p2;
 	} else {
@@ -99,16 +99,16 @@ FLOW5.Connection.prototype.getOther= function(p) {
 	}
 };
 
-FLOW5.Connection.prototype.getDistance = function(){
+FLOW.Connection.prototype.getDistance = function(){
 	return Math.sqrt(Math.pow(this.p1.x-this.p2.x,2)+Math.pow(this.p1.y-this.p2.y,2));
 };
 
 
-FLOW5.GRID.prototype.grid= null;
-FLOW5.GRID.prototype.size= -1;
-FLOW5.GRID.prototype.iterationCycle = true;
+FLOW.GRID.prototype.grid= null;
+FLOW.GRID.prototype.size= -1;
+FLOW.GRID.prototype.iterationCycle = true;
 
-FLOW5.GRID.prototype.init= function(size) {
+FLOW.GRID.prototype.init= function(size) {
 	this.size = size;
 	this.grid = new Array(size);
 
@@ -120,27 +120,27 @@ FLOW5.GRID.prototype.init= function(size) {
 	}
 };
 
-FLOW5.GRID.prototype.getBowl= function(x, y) {
+FLOW.GRID.prototype.getBowl= function(x, y) {
 	return this.grid[x][y];
 };
 
-FLOW5.GRID.prototype.addToGrid= function(p, x, y) {
+FLOW.GRID.prototype.addToGrid= function(p, x, y) {
 	p.bx = x;
 	p.by = y;
 	this.grid[x][y].push(p);
 	p.bowl = this.grid[x][y];
 };
 
-FLOW5.GRID.prototype.indexOf= function(p, x, y) {
+FLOW.GRID.prototype.indexOf= function(p, x, y) {
 	return this.grid[x][y].indexOf(p);
 };
 
-FLOW5.GRID.prototype.inBowl= function(p, x, y) {
+FLOW.GRID.prototype.inBowl= function(p, x, y) {
 	return this.indexOf(p, x, y) != -1;
 };
 
 // O(n^3) !!
-FLOW5.GRID.prototype.inGrid= function(p) {
+FLOW.GRID.prototype.inGrid= function(p) {
 	for (var i = 0; i < this.size; i++) {
 		for (var j = 0; j < this.size; j++) {
 			if(this.inBowl(p,i,j)) { return true;}
@@ -149,7 +149,7 @@ FLOW5.GRID.prototype.inGrid= function(p) {
 	return false;
 };
 
-FLOW5.GRID.prototype.forEachBowl= function(f) {
+FLOW.GRID.prototype.forEachBowl= function(f) {
 	for (var i = 0; i < this.size; i++) {
 		for (var j = 0; j < this.size; j++) {
 			f(this.grid[j][i]);
@@ -157,7 +157,7 @@ FLOW5.GRID.prototype.forEachBowl= function(f) {
 	}
 };
 
-FLOW5.DynamicGRID.prototype.addParticle = function(p) {
+FLOW.DynamicGRID.prototype.addParticle = function(p) {
 	// Push in the Array
 	this.particles.push(p);
 	this.activeQue.add(p);
@@ -168,13 +168,13 @@ FLOW5.DynamicGRID.prototype.addParticle = function(p) {
 	this.particleGrid.addToGrid(p, bX, bY);
 };
 
-FLOW5.DynamicGRID.prototype.updateGrid = function() {
+FLOW.DynamicGRID.prototype.updateGrid = function() {
 	this.calculateF();
 	this.applyF();
 	return this.activeQue.size() !== 0;
 };
 
-FLOW5.DynamicGRID.prototype.calculateF = function(){
+FLOW.DynamicGRID.prototype.calculateF = function(){
 	var bX=0;
 	var bY=0;
 	var p;
@@ -191,7 +191,7 @@ FLOW5.DynamicGRID.prototype.calculateF = function(){
 		bX = p.bx;
 		bY = p.by;
 
-		// Alle Verbindungen, die noch nicht angeschaut wurden:
+		// Each connection
 		for (var c = 0; c < p.connection.length; c++) {
 			conn = p.connection[c];
 			if(conn.active == self.iterationCycle) {
@@ -281,7 +281,7 @@ FLOW5.DynamicGRID.prototype.calculateF = function(){
 	});
 };
 
-FLOW5.DynamicGRID.prototype.applyF = function(){
+FLOW.DynamicGRID.prototype.applyF = function(){
 	var self = this;
 	this.activeQue.forEach(function(p){
 		p.updated = true;
@@ -336,7 +336,7 @@ FLOW5.DynamicGRID.prototype.applyF = function(){
 	});
 };
 
-FLOW5.DynamicGRID.prototype.force = function(dist, nullR, dv, scale, border, stable){
+FLOW.DynamicGRID.prototype.force = function(dist, nullR, dv, scale, border, stable){
 	var cVar = -(Math.pow(dist-nullR,3)*dv+(dist-nullR)*scale);
 	if(!stable){
 		if(cVar<0){cVar = 0;}
@@ -346,7 +346,7 @@ FLOW5.DynamicGRID.prototype.force = function(dist, nullR, dv, scale, border, sta
 	return cVar;
 };
 
-FLOW5.DynamicGRID.prototype.setActive = function(p, b) {
+FLOW.DynamicGRID.prototype.setActive = function(p, b) {
 	if(b) {
 		this.activeQue.add(p);
 		p.active = true;
@@ -357,18 +357,18 @@ FLOW5.DynamicGRID.prototype.setActive = function(p, b) {
 	}
 };
 
-FLOW5.DynamicGRID.prototype.cleanup = function(){
+FLOW.DynamicGRID.prototype.cleanup = function(){
 	for (var i = 0; i < this.particles.length; i++) {
 		this.particles[i].friction = this.particles[i].finalFriction;
 	};
 };
 
-FLOW5.DynamicGRID.prototype.settings={
+FLOW.DynamicGRID.prototype.settings={
 	gridSize: 600,
 	bowlSize: 30
 };
 
-FLOW5.DynamicGRID.prototype.getParticleByPos = function(x,y){
+FLOW.DynamicGRID.prototype.getParticleByPos = function(x,y){
 	var bX = Math.floor(x/this.settings.bowlSize);
 	var bY = Math.floor(y/this.settings.bowlSize);
 	var b = this.particleGrid.getBowl(bX,bY);
@@ -385,11 +385,11 @@ FLOW5.DynamicGRID.prototype.getParticleByPos = function(x,y){
 }
 
 
-FLOW5.DynamicGRID.prototype.particles = null;
-FLOW5.DynamicGRID.prototype.activeQue=null;
+FLOW.DynamicGRID.prototype.particles = null;
+FLOW.DynamicGRID.prototype.activeQue=null;
+FLOW.DynamicGRID.prototype.particleGrid=null;
 
-FLOW5.DynamicGRID.prototype.particleGrid=null;
-
+// FIXME: DONT SPAM THE GLOBAL NAMESPACE
 window.log = function(t){console.log(t);};
 
 window.S = {
